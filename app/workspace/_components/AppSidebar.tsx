@@ -62,7 +62,7 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import React, { useContext,useState } from "react"
-import { UserDetailContext } from "@/contex/UserDetailContext"
+import { UserDetailContext } from "@/context/UserDetailContext"
 import { Progress } from "@radix-ui/react-progress"
 //import { UserDetailContext } from "@/contex/UserDetailContext"
 //import { UserDetailContext } from "@/context/UserDetailContext"

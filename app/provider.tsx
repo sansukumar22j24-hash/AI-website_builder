@@ -35,7 +35,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useUser } from '@clerk/nextjs'
-import { UserDetailContext } from '@/contex/UserDetailContext'
+import { UserDetailContext } from '@/context/UserDetailContext'
 
 const UserDetailProvider = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   const { user } = useUser()

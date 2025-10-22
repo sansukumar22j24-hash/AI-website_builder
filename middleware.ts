@@ -1,4 +1,5 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { auth, clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server'
 
 
 const isPublicRoute = createRouteMatcher([
@@ -21,3 +22,12 @@ export const config = {
     '/(api|trpc)(.*)',
   ],
 }
+
+
+// export default function middleware(req) {
+//   const { user } = auth()
+//   if (!user) {
+//     return NextResponse.redirect('/sign-in')
+//   }
+//   return NextResponse.next()
+// }
