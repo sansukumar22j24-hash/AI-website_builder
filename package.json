@@ -61,8 +61,6 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
-    "@esbuild-kit/core-utils": "^3.3.2",
-    "@esbuild-kit/esm-loader": "^2.6.5",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
