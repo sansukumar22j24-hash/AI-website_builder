@@ -60,4 +60,4 @@ const UserDetailProvider = ({ children }: Readonly<{ children: React.ReactNode }
   )
 }
 
-export default UserDetailProvider
+export default UserDetailProvider;
