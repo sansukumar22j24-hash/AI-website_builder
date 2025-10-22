@@ -56,11 +56,12 @@ const Header = () => {
       </Button>
     </Link>
   ) : (
-    <SignInButton mode="modal" forceRedirectUrl="/workspace">
+       <SignInButton mode="modal" forceRedirectUrl="/workspace">
       <Button>
         Get Started <ArrowRight />
       </Button>
     </SignInButton>
+  
   )}
 </div>
       
@@ -79,4 +80,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Header;

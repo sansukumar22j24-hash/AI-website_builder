@@ -180,33 +180,76 @@ import { db } from "@/config/db";
 import { usersTable } from "@/config/schema";
 import { eq } from "drizzle-orm";
 
+
+// export async function POST(req: NextRequest) {
+//   const user = await currentUser();
+//   const body = await req.json();
+//   //const userId = body.id;
+//   const url = new URL(req.url);
+// //const param = url.searchParams.get("yourParam");
+
+
+//   if (!user || !user.primaryEmailAddress?.emailAddress) {
+//     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+//   }
+
+//   const email = user.primaryEmailAddress.emailAddress;
+
+//   // Check if user already exists
+//   const existingUsers = await db
+//     .select()
+//     .from(usersTable)
+//     .where(eq(usersTable.email, email));
+
+//   if (existingUsers.length === 0) {
+//     const newUser = {
+//       name: user.fullName ?? "NA",
+//       email,
+//       age: 0,
+//       credits: 2,
+//     };
+
+//     await db.insert(usersTable).values(newUser);
+
+//     return NextResponse.json({ user: newUser }, { status: 201 });
+//   }
+
+//   return NextResponse.json({ user: existingUsers[0] });
+// }
 export async function POST(req: NextRequest) {
-  const user = await currentUser();
+  try {
+    const user = await currentUser();
+    const body = await req.json();
 
-  if (!user || !user.primaryEmailAddress?.emailAddress) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    if (!user || !user.primaryEmailAddress?.emailAddress) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const email = user.primaryEmailAddress.emailAddress;
+
+    const existingUsers = await db
+      .select()
+      .from(usersTable)
+      .where(eq(usersTable.email, email));
+
+    if (existingUsers.length === 0) {
+      const newUser = {
+        name: user.fullName ?? "NA",
+        email,
+        age: 0,
+        credits: 2,
+      };
+
+      await db.insert(usersTable).values(newUser);
+      return NextResponse.json({ user: newUser }, { status: 201 });
+    }
+
+    return NextResponse.json({ user: existingUsers[0] }, { status: 200 });
+  } catch (error) {
+    console.error("User POST error:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
-
-  const email = user.primaryEmailAddress.emailAddress;
-
-  // Check if user already exists
-  const existingUsers = await db
-    .select()
-    .from(usersTable)
-    .where(eq(usersTable.email, email));
-
-  if (existingUsers.length === 0) {
-    const newUser = {
-      name: user.fullName ?? "NA",
-      email,
-      age: 0,
-      credits: 2,
-    };
-
-    await db.insert(usersTable).values(newUser);
-
-    return NextResponse.json({ user: newUser }, { status: 201 });
-  }
-
-  return NextResponse.json({ user: existingUsers[0] });
+}
+export async function GET() {
+  return NextResponse.json({ message: "API route is working!" });
 }

@@ -2,7 +2,7 @@
 
 
 import { Button } from '@/components/ui/button'
-import { SignInButton } from '@clerk/nextjs'
+import { SignInButton, useUser } from '@clerk/nextjs'
 import { ArrowUp, HomeIcon, ImagePlus, Key, LayoutDashboard, User } from 'lucide-react'
 import React, { useState } from 'react'
 
@@ -55,7 +55,7 @@ const Hero = () => {
 
 
 
-
+    const { isSignedIn } = useUser();
 
 
 
@@ -79,9 +79,11 @@ const [userInput,setUserInput]=useState<string>();
             className='w-full h-24 focus:outline-none focus:ring-0 resize-none'/>
             <div className=' flex item-center justify-between'>
                 <Button variant={'ghost'}  > <ImagePlus/></Button>
-                <SignInButton mode='modal' forceRedirectUrl={'/workspace'}>
+
+
+                {!isSignedIn && (<SignInButton mode='modal' forceRedirectUrl={'/workspace'}>
 <Button disabled={!userInput}><ArrowUp/></Button>
-                </SignInButton>
+                </SignInButton>)}
                 
             </div>
         </div>
